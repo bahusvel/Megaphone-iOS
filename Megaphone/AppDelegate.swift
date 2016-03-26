@@ -15,8 +15,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	
+		let notificationSettings = UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil)
+		
+		application.registerUserNotificationSettings(notificationSettings)
+		application.registerForRemoteNotifications()
+		
 		// Override point for customization after application launch.
 		return true
+	}
+	
+	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+		print(deviceToken)
+	}
+	
+	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+		print("Could not register for remote notifications", error)
 	}
 
 	func applicationWillResignActive(application: UIApplication) {
