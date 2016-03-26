@@ -35,7 +35,7 @@ public class MegaphoneUI : NSObject {
         color2.getRed(&color2RedComponent, green: &color2GreenComponent, blue: &color2BlueComponent, alpha: nil)
 
         let color5 = UIColor(red: (color2RedComponent * 0 + 1), green: (color2GreenComponent * 0 + 1), blue: (color2BlueComponent * 0 + 1), alpha: (CGColorGetAlpha(color2.CGColor) * 0 + 1))
-        let color4 = UIColor(red: 0.316, green: 0.249, blue: 0.718, alpha: 1.000)
+        let color4 = UIColor(red: 0.110, green: 0.000, blue: 0.600, alpha: 1.000)
         let color6 = UIColor(red: 0.000, green: 0.643, blue: 1.000, alpha: 1.000)
         let color7 = color6.colorWithAlphaComponent(0.5)
 
@@ -192,6 +192,97 @@ public class MegaphoneUI : NSObject {
 
 
         CGContextRestoreGState(context)
+    }
+
+    public class func drawBnW() {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+        //// Group 5
+        CGContextSaveGState(context)
+        CGContextTranslateCTM(context, 1, 35)
+        CGContextRotateCTM(context, -45 * CGFloat(M_PI) / 180)
+
+
+
+        //// Group 7
+        //// Group 8
+        //// Bezier 8 Drawing
+        let bezier8Path = UIBezierPath()
+        bezier8Path.moveToPoint(CGPointMake(16.5, 13.63))
+        bezier8Path.addCurveToPoint(CGPointMake(39.5, 4.24), controlPoint1: CGPointMake(29.5, 13.63), controlPoint2: CGPointMake(39.5, 4.24))
+        bezier8Path.addLineToPoint(CGPointMake(39.5, 31.47))
+        bezier8Path.addCurveToPoint(CGPointMake(16.5, 22.08), controlPoint1: CGPointMake(39.5, 31.47), controlPoint2: CGPointMake(28.5, 22.08))
+        bezier8Path.addCurveToPoint(CGPointMake(16.5, 13.63), controlPoint1: CGPointMake(16.5, 19.26), controlPoint2: CGPointMake(16.5, 13.63))
+        bezier8Path.lineCapStyle = .Round;
+
+        bezier8Path.lineJoinStyle = .Bevel;
+
+        UIColor.lightGrayColor().setStroke()
+        bezier8Path.lineWidth = 0.5
+        bezier8Path.stroke()
+
+
+        //// Rectangle 3 Drawing
+        let rectangle3Path = UIBezierPath(roundedRect: CGRectMake(2.12, 13.44, 17, 8.86), byRoundingCorners: [UIRectCorner.TopLeft, UIRectCorner.BottomLeft], cornerRadii: CGSizeMake(4.43, 4.43))
+        rectangle3Path.closePath()
+        UIColor.darkGrayColor().setFill()
+        rectangle3Path.fill()
+
+
+
+
+        //// Bezier 2 Drawing
+        let bezier2Path = UIBezierPath()
+        bezier2Path.moveToPoint(CGPointMake(39.62, 15.56))
+        bezier2Path.addCurveToPoint(CGPointMake(42, 18.03), controlPoint1: CGPointMake(40.95, 15.62), controlPoint2: CGPointMake(42, 16.7))
+        bezier2Path.addCurveToPoint(CGPointMake(39.62, 20.51), controlPoint1: CGPointMake(42, 19.36), controlPoint2: CGPointMake(40.95, 20.44))
+        bezier2Path.addCurveToPoint(CGPointMake(39.62, 15.56), controlPoint1: CGPointMake(39.62, 18.86), controlPoint2: CGPointMake(39.62, 17.18))
+        bezier2Path.closePath()
+        UIColor.lightGrayColor().setFill()
+        bezier2Path.fill()
+
+
+
+
+
+        CGContextRestoreGState(context)
+    }
+
+    public class func drawMessageTypes() {
+        //// Color Declarations
+        let informationColor = UIColor(red: 0.000, green: 0.714, blue: 1.000, alpha: 0.567)
+        var informationColorHueComponent: CGFloat = 1,
+            informationColorSaturationComponent: CGFloat = 1,
+            informationColorBrightnessComponent: CGFloat = 1
+        informationColor.getHue(&informationColorHueComponent, saturation: &informationColorSaturationComponent, brightness: &informationColorBrightnessComponent, alpha: nil)
+
+        let criticalColor = UIColor(hue: 0, saturation: informationColorSaturationComponent, brightness: informationColorBrightnessComponent, alpha: CGColorGetAlpha(informationColor.CGColor))
+        let adColor = UIColor(hue: 0.2, saturation: informationColorSaturationComponent, brightness: informationColorBrightnessComponent, alpha: CGColorGetAlpha(informationColor.CGColor))
+        let favouriteColor = UIColor(hue: 0.4, saturation: informationColorSaturationComponent, brightness: informationColorBrightnessComponent, alpha: CGColorGetAlpha(informationColor.CGColor))
+
+        //// Rectangle Drawing
+        let rectanglePath = UIBezierPath(rect: CGRectMake(11, 12, 154, 37))
+        informationColor.setFill()
+        rectanglePath.fill()
+
+
+        //// Rectangle 2 Drawing
+        let rectangle2Path = UIBezierPath(rect: CGRectMake(11, 49, 154, 37))
+        criticalColor.setFill()
+        rectangle2Path.fill()
+
+
+        //// Rectangle 3 Drawing
+        let rectangle3Path = UIBezierPath(rect: CGRectMake(11, 86, 154, 37))
+        adColor.setFill()
+        rectangle3Path.fill()
+
+
+        //// Rectangle 4 Drawing
+        let rectangle4Path = UIBezierPath(rect: CGRectMake(11, 123, 154, 37))
+        favouriteColor.setFill()
+        rectangle4Path.fill()
     }
 
 }

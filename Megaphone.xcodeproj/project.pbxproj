@@ -11,6 +11,8 @@
 		A8290C761CA5F63300AC9B02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8290C741CA5F63300AC9B02 /* Main.storyboard */; };
 		A8290C781CA5F63300AC9B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8290C771CA5F63300AC9B02 /* Assets.xcassets */; };
 		A8290C7B1CA5F63300AC9B02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8290C791CA5F63300AC9B02 /* LaunchScreen.storyboard */; };
+		A8A2D2561CA63AF600C22510 /* MegaphoneUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A2D2551CA63AF600C22510 /* MegaphoneUI.swift */; };
+		A8A2D2581CA63B1D00C22510 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A2D2571CA63B1D00C22510 /* MessageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		A8290C771CA5F63300AC9B02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8290C7A1CA5F63300AC9B02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8290C7C1CA5F63300AC9B02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8A2D2551CA63AF600C22510 /* MegaphoneUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MegaphoneUI.swift; sourceTree = "<group>"; };
+		A8A2D2571CA63B1D00C22510 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				A8290C6E1CA5F63300AC9B02 /* AppDelegate.swift */,
 				A8290C741CA5F63300AC9B02 /* Main.storyboard */,
+				A8A2D2571CA63B1D00C22510 /* MessageCell.swift */,
+				A8A2D2551CA63AF600C22510 /* MegaphoneUI.swift */,
 				A8290C771CA5F63300AC9B02 /* Assets.xcassets */,
 				A8290C791CA5F63300AC9B02 /* LaunchScreen.storyboard */,
 				A8290C7C1CA5F63300AC9B02 /* Info.plist */,
@@ -138,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8A2D2561CA63AF600C22510 /* MegaphoneUI.swift in Sources */,
 				A8290C6F1CA5F63300AC9B02 /* AppDelegate.swift in Sources */,
+				A8A2D2581CA63B1D00C22510 /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +302,7 @@
 				A8290C811CA5F63300AC9B02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
