@@ -9,17 +9,25 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
 
 	var window: UIWindow?
-
-
-	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	var registrationToken: String!
+	var registrationOptions = [String: AnyObject]()
+	let GCM_SENDER_ID = "763226488449"
 	
-		let notificationSettings = UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil)
+	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		
-		application.registerUserNotificationSettings(notificationSettings)
-		application.registerForRemoteNotifications()
+		if #available(iOS 8.0, *) {
+			let settings: UIUserNotificationSettings =
+				UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+			application.registerUserNotificationSettings(settings)
+			application.registerForRemoteNotifications()
+		}	else {
+			// Fallback
+			let types: UIRemoteNotificationType = [.Alert, .Badge, .Sound]
+			application.registerForRemoteNotificationTypes(types)
+		}
 		
 		// Override point for customization after application launch.
 		return true
@@ -27,6 +35,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
 		print(deviceToken)
+		let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
+		instanceIDConfig.delegate = self
+		// Start the GGLInstanceID shared instance with that config and request a registration
+		// token to enable reception of notifications
+		GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
+		registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken,
+		                       kGGLInstanceIDAPNSServerTypeSandboxOption:true]
+		GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(GCM_SENDER_ID,
+		                                                         scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
+	}
+	
+	func registrationHandler(registrationToken: String!, error: NSError!) {
+		if (registrationToken != nil) {
+			self.registrationToken = registrationToken
+			print("Registration Token: \(registrationToken)")
+		} else {
+			print("Registration to GCM failed with error: \(error.localizedDescription)")
+		}
+	}
+	
+	func onTokenRefresh() {
+		// A rotation of the registration tokens is happening, so the app needs to request a new token.
+		print("The GCM registration token needs to be changed.")
+		GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(GCM_SENDER_ID,
+                                                           scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
 	}
 	
 	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
