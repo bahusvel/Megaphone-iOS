@@ -10,5 +10,6 @@
 #define Megaphone_Bridging_Header_h
 
 #import <Google/CloudMessaging.h>
+#import <Google/SignIn.h>
 
 #endif /* Megaphone_Bridging_Header_h */

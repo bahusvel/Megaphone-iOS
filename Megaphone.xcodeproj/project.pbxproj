@@ -12,6 +12,8 @@
 		A8290C761CA5F63300AC9B02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8290C741CA5F63300AC9B02 /* Main.storyboard */; };
 		A8290C781CA5F63300AC9B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8290C771CA5F63300AC9B02 /* Assets.xcassets */; };
 		A8290C7B1CA5F63300AC9B02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8290C791CA5F63300AC9B02 /* LaunchScreen.storyboard */; };
+		A8724D131CC97A5400FBED13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8724D121CC97A5400FBED13 /* GoogleService-Info.plist */; };
+		A8724D151CC97B3B00FBED13 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8724D141CC97B3B00FBED13 /* SignInViewController.swift */; };
 		A8A2D2561CA63AF600C22510 /* MegaphoneUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A2D2551CA63AF600C22510 /* MegaphoneUI.swift */; };
 		A8A2D2581CA63B1D00C22510 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A2D2571CA63B1D00C22510 /* MessageCell.swift */; };
 		A8A2D25A1CA63E1B00C22510 /* MegaphoneClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A2D2591CA63E1B00C22510 /* MegaphoneClient.swift */; };
@@ -24,6 +26,8 @@
 		A8290C771CA5F63300AC9B02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8290C7A1CA5F63300AC9B02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8290C7C1CA5F63300AC9B02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8724D121CC97A5400FBED13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A8724D141CC97B3B00FBED13 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		A8A2D2551CA63AF600C22510 /* MegaphoneUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MegaphoneUI.swift; sourceTree = "<group>"; };
 		A8A2D2571CA63B1D00C22510 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		A8A2D2591CA63E1B00C22510 /* MegaphoneClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MegaphoneClient.swift; sourceTree = "<group>"; };
@@ -74,9 +78,11 @@
 		A8290C6D1CA5F63300AC9B02 /* Megaphone */ = {
 			isa = PBXGroup;
 			children = (
+				A8724D121CC97A5400FBED13 /* GoogleService-Info.plist */,
 				A8290C6E1CA5F63300AC9B02 /* AppDelegate.swift */,
 				A8C330131CB9ADA6007390EA /* Megaphone-Bridging-Header.h */,
 				A8290C741CA5F63300AC9B02 /* Main.storyboard */,
+				A8724D141CC97B3B00FBED13 /* SignInViewController.swift */,
 				A8A2D2571CA63B1D00C22510 /* MessageCell.swift */,
 				A8A2D2551CA63AF600C22510 /* MegaphoneUI.swift */,
 				A8290C771CA5F63300AC9B02 /* Assets.xcassets */,
@@ -165,6 +171,7 @@
 			files = (
 				A8290C7B1CA5F63300AC9B02 /* LaunchScreen.storyboard in Resources */,
 				A8290C781CA5F63300AC9B02 /* Assets.xcassets in Resources */,
+				A8724D131CC97A5400FBED13 /* GoogleService-Info.plist in Resources */,
 				A8290C761CA5F63300AC9B02 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,6 +234,7 @@
 				A8A2D2561CA63AF600C22510 /* MegaphoneUI.swift in Sources */,
 				A8290C6F1CA5F63300AC9B02 /* AppDelegate.swift in Sources */,
 				A8A2D2581CA63B1D00C22510 /* MessageCell.swift in Sources */,
+				A8724D151CC97B3B00FBED13 /* SignInViewController.swift in Sources */,
 				A8A2D25A1CA63E1B00C22510 /* MegaphoneClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GIDSignInDelegate {
 
 	var window: UIWindow?
 	var registrationToken: String!
@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
 	let GCM_SENDER_ID = "763226488449"
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+		var configureError: NSError?
+		GGLContext.sharedInstance().configureWithError(&configureError)
+		assert(configureError == nil, "Error configuring Google services: \(configureError)")
+		GIDSignIn.sharedInstance().delegate = self
 		
 		if #available(iOS 8.0, *) {
 			let settings: UIUserNotificationSettings =
@@ -31,6 +35,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
 		
 		// Override point for customization after application launch.
 		return true
+	}
+	
+	func application(application: UIApplication,
+	                 openURL url: NSURL, options: [String: AnyObject]) -> Bool {
+		return GIDSignIn.sharedInstance().handleURL(url,
+		                                            sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String,
+		                                            annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
+	}
+	
+	func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
+	            withError error: NSError!) {
+		if (error == nil) {
+			print(user.profile.email)
+		} else {
+			print("\(error.localizedDescription)")
+		}
+	}
+	
+	func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!,
+	            withError error: NSError!) {
+		// Perform any operations when the user disconnects from app here.
+		// ...
 	}
 	
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
