@@ -8,12 +8,17 @@
 
 import UIKit
 
-class SignInViewController: UIViewController, GIDSignInUIDelegate {
+class SignInViewController: UIViewController, UIWebViewDelegate {
+	static var cookie: NSHTTPCookie? = nil
+	@IBOutlet weak var webView: UIWebView!
+	let LOGIN_URL = NSURL(string: "https://megaphone-service.appspot.com/login")!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		GIDSignIn.sharedInstance().uiDelegate = self
-		GIDSignIn.sharedInstance().signInSilently()
+		let request = NSMutableURLRequest(URL: LOGIN_URL)
+		request.HTTPMethod = "GET"
+		webView.delegate = self
+		webView.loadRequest(request)
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +26,36 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	func webViewDidFinishLoad(webView: UIWebView) {
+		print("Finished")
+		let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(LOGIN_URL)
+		for cookie in cookies!{
+			if cookie.name == "SACSID" {
+				print(cookie.value)
+				SignInViewController.cookie = cookie
+				login()
+				self.performSegueWithIdentifier("loginSegue", sender: self)
+			}
+		}
+	}
+	
+	
+	func login(){
+		let request = NSMutableURLRequest(URL: LOGIN_URL)
+		request.HTTPMethod = "GET"
+		let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+			guard error == nil && data != nil else {
+				print("error=\(error)")
+				return
+			}
+			if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {
+				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+				print("response = \(response)")
+			}
+			let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+			print("responseString = \(responseString)")
+		}
+		task.resume()
+	}
+	
 }

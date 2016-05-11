@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
 
 	var window: UIWindow?
 	var registrationToken: String!
@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GI
 		var configureError: NSError?
 		GGLContext.sharedInstance().configureWithError(&configureError)
 		assert(configureError == nil, "Error configuring Google services: \(configureError)")
-		GIDSignIn.sharedInstance().delegate = self
 		
 		if #available(iOS 8.0, *) {
 			let settings: UIUserNotificationSettings =
@@ -42,21 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GI
 		return GIDSignIn.sharedInstance().handleURL(url,
 		                                            sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String,
 		                                            annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
-	}
-	
-	func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
-	            withError error: NSError!) {
-		if (error == nil) {
-			print(user.profile.email)
-		} else {
-			print("\(error.localizedDescription)")
-		}
-	}
-	
-	func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!,
-	            withError error: NSError!) {
-		// Perform any operations when the user disconnects from app here.
-		// ...
 	}
 	
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

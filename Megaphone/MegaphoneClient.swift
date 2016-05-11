@@ -11,19 +11,33 @@ import Foundation
 
 
 class MegaphoneClient{
-	let SERVER_URL = ""
-	let IDENTITY = "bahus.vel@gmail.com"
+	let SERVER_URL = "https://megaphone-service.appspot.com"
+	var IDENTITY: String?
 	
 	
 	func sendPost(requestData: NSData, url: String){
-		let postLength = String(requestData.length)
 		let request = NSMutableURLRequest(URL: NSURL(string: url)!)
 		request.HTTPMethod = "POST"
-		request.setValue(postLength, forHTTPHeaderField: "Content-Length")
-		request.setValue("application/json", forKey: "Content-Type")
 		request.HTTPBody = requestData
-		NSURLConnection(request: request, delegate: self)
+		let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+			guard error == nil && data != nil else {                                                          // check for fundamental networking error
+				print("error=\(error)")
+				return
+			}
+			
+			if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+				print("response = \(response)")
+			}
+			
+			let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+			print("responseString = \(responseString)")
+		}
+		task.resume()
 	}
 	
+	func login(){
+		sendPost((IDENTITY?.dataUsingEncoding(NSUTF8StringEncoding))!, url: SERVER_URL + "/login")
+	}
 	
 }
