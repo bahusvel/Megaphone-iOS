@@ -15,11 +15,19 @@ class SignInViewController: UIViewController, UIWebViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		let request = NSMutableURLRequest(URL: LOGIN_URL)
-		request.HTTPMethod = "GET"
-		webView.delegate = self
-		webView.loadRequest(request)
     }
+	
+	override func viewDidAppear(animated: Bool) {
+		if checkCookie() {
+			self.performSegueWithIdentifier("loginSegue", sender: self)
+		} else {
+			webView.hidden = false
+			let request = NSMutableURLRequest(URL: LOGIN_URL)
+			request.HTTPMethod = "GET"
+			webView.delegate = self
+			webView.loadRequest(request)
+		}
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -28,15 +36,23 @@ class SignInViewController: UIViewController, UIWebViewDelegate {
     
 	func webViewDidFinishLoad(webView: UIWebView) {
 		print("Finished")
+		if checkCookie(){
+			login()
+			self.performSegueWithIdentifier("loginSegue", sender: self)
+		}
+	}
+	
+	func checkCookie() -> Bool{
 		let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(LOGIN_URL)
+		
 		for cookie in cookies!{
 			if cookie.name == "SACSID" {
 				print(cookie.value)
 				SignInViewController.cookie = cookie
-				login()
-				self.performSegueWithIdentifier("loginSegue", sender: self)
+				return true
 			}
 		}
+		return false
 	}
 	
 	
